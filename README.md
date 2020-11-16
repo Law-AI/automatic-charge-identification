@@ -21,4 +21,18 @@ We make available:
 ## Codes
 
 ## Dataset
+### Charge Descriptions
+The file "Labels.jsonl" contains the charge descriptions. Each line should contain a JSON string which represents the charge description. Each charge description is a Python Dict with the following keys:
+```
+  chargeid: str -> Charge ID
+  text: List[str] -> List of sentences
+```
 
+### Fact Descriptions
+The file "Train-Sent.jsonl" and "Test-Doc.jsonl" are fact description datasets. Each line should contain a JSON string which represents the fact description. Each fact description is a Python Dict with the following keys:
+```
+  factid: str -> Fact ID
+  text: List[str] -> List of sentences
+  sent_labels: List[List[str]] -> List of List of chargeid, each sublist is the sent-level charge; Optional; not needed for inference or vanilla single-task training
+  doc_labels: List[str] -> List of chargeid, entire document-level charges; Optional, not needed for inference
+```
