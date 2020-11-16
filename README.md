@@ -36,3 +36,18 @@ The file "Train-Sent.jsonl" and "Test-Doc.jsonl" are fact description datasets. 
   sent_labels: List[List[str]] -> List of List of chargeid, each sublist is the sent-level charge; Optional; not needed for inference or vanilla single-task training
   doc_labels: List[str] -> List of chargeid, entire document-level charges; Optional, not needed for inference
 ```
+## Training
+### Input Data
+Setup the Charge and Fact Description files as mentioned above. 'sent_labels' are compulsory for multi-task learning, not required for single-task learning.
+
+### Usage
+
+### Output Data
+
+## Inference
+### Input Data
+Setup the Charge and Fact Description files as mentioned above. 'sent_labels' and 'doc_labels' are not compulsory.
+
+### Usage
+
+### Output Data
