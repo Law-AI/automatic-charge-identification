@@ -1,8 +1,9 @@
-
 import json
 import spacy
 from itertools import groupby
 from tqdm import tqdm
+
+import numpy as np
 
 parser = spacy.load("en_core_web_sm")
 
@@ -19,25 +20,31 @@ def build_dataset_from_jsonl(data_file):
 		for line in tqdm(fr):
 			doc = json.loads(line)
 			
-			doc['text'] = list(map(lambda x: tokenize_text(x), doc['sentences']))
+			doc['text'] = list(map(lambda x: tokenize_text(x), doc['text']))
 			data.append(doc)
 	return data
 
-def calc_frequencies(data, word_freq, sent_label_freq, doc_label_freq):
+def calc_frequencies(data, word_freq, sent_label_freq=None, doc_label_freq=None):
 	for doc in data:
 		for i in range(len(doc['text'])):
-			for word in doc['text'][i]: word_freq += 1
+			for word in doc['text'][i]: word_freq[word] += 1
 			if 'sent_labels' in doc:
 				for label in doc['sent_labels'][i]: sent_label_freq[label] += 1
 		if 'doc_labels' in doc:
 			for label in doc['doc_labels']: doc_label_freq[label] += 1
 
 def create_vocab(word_freq, threshold=2, pretrained_vocab=None):
-	words = set(w for w, f in word_freq.items() if w in pretrained_vocab or f > threshold)
+	words = set(w for w, f in word_freq.items() if pretrained_vocab and w in pretrained_vocab or f > threshold)
 	word_vocab = {w: i + 2 for i, w in enumerate(words)}
 	word_vocab['[PAD]'] = 0
 	word_vocab['[UNK]'] = 1
 	return word_vocab
+
+def create_label_vocab(label_data):
+	label_vocab = {}
+	for lab in label_data:
+		label_vocab[lab['chargeid']] = len(label_vocab)
+	return label_vocab
 
 def create_ptemb_matrix(word_vocab, pretrained, embedding_dim=128):
 	ptemb_matrix = np.zeros((len(word_vocab), embedding_dim))
@@ -63,7 +70,7 @@ def numericalize_dataset(data, word_vocab, label_vocab):
 			doc['doc_labels'] = vectorize_labels(doc['doc_labels'])
 
 def calc_label_weights(label_vocab, label_freq, num_instances):
-	label_wts = np.zeros((len(label_freq),))
+	label_wts = np.zeros((len(label_vocab),))
 	for lab, freq in label_freq.items():
 		if lab in label_vocab:
 			label_wts[label_vocab[lab]] = num_instances / freq
