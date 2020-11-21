@@ -42,6 +42,8 @@ Setup the Charge and Fact Description files as mentioned above. 'sent_labels' ar
 
 ### Usage
 
+
+
 ### Output Data
 
 ## Inference
@@ -49,5 +51,17 @@ Setup the Charge and Fact Description files as mentioned above. 'sent_labels' ar
 Setup the Charge and Fact Description files as mentioned above. 'sent_labels' and 'doc_labels' are not compulsory.
 
 ### Usage
-
+The generalized usage command is given as:
+```
+  python main.py --[arg1] <arg1 param> --[arg2] <arg2 param> ...
+ ```
+To check out the details:
+```
+  python main.py -h
+```
 ### Output Data
+The following are saved in the saved folder (specified by --save_path):
+```
+  model.pt: torch.nn.Module -> State dict of best model (based on macro-F1 on validation set)
+  metrics.json: JSON Dict --> Best Label-wise and macro Precision, Recall and F1 score on (based on macro-F1 on validation set)
+```
