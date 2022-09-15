@@ -2,7 +2,7 @@
 Identifying charges from the Indian Penal Code given the textual description of the charges and facts of a criminal case.
 
 ## Introduction
-This is the repository for the paper titled "Automatic Crime Identification from Facts: A Few Sentence-Level Crime Annotations is All You Need" which is to be presented at <a href="https://coling2020.org/">The 28th International Conference on Computational Linguistics, 2020</a>.
+This is the repository for the paper titled <a href="https://aclanthology.org/2020.coling-main.88/">"Automatic Crime Identification from Facts: A Few Sentence-Level Crime Annotations is All You Need"</a> which was presented at <a href="https://coling2020.org/">The 28th International Conference on Computational Linguistics, 2020</a>.
 
 Identifying the relevant charges given the fact descriptions of a legal scenario and the statutory laws defining charges is one of the most important tasks in the judicial process of countries following Civil Law System. This task is challenging, since the statutory laws are usually written in formal and abstract language to encapsulate wide-ranging scenarios. Meanwhile, the fact descriptions can be informal, and can contain a lot of text (like background information) that do not indicate any crime, but are included for the sake of informativeness and completion. Additionally, more than one charge may be relevant, and the frequency distribution of charges is usually highly skewed (long-tail distribution). 
 
@@ -16,9 +16,24 @@ We make available:
 
 ## Citation
 
-## Requirements
+If you use this code, please cite our paper:
+```
+@inproceedings{paul-etal-2020-automatic,
+    title = "Automatic Charge Identification from Facts: A Few Sentence-Level Charge Annotations is All You Need",
+    author = "Paul, Shounak  and
+      Goyal, Pawan  and
+      Ghosh, Saptarshi",
+    booktitle = "Proceedings of the 28th International Conference on Computational Linguistics",
+    month = dec,
+    year = "2020",
+    address = "Barcelona, Spain (Online)",
+    publisher = "International Committee on Computational Linguistics",
+    url = "https://aclanthology.org/2020.coling-main.88",
+    doi = "10.18653/v1/2020.coling-main.88",
+    pages = "1011--1022"
+}
+```
 
-## Codes
 
 ## Dataset
 ### Charge Descriptions
