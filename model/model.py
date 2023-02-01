@@ -19,7 +19,7 @@ class BiRNN(nn.Module):
         batch_size = sequence_in.shape[0]
         hidden = torch.randn(2, batch_size, self.embed_dim // 2).to(self.device)
         
-        packed_sequence_in = U.pack_padded_sequence(sequence_in, lens, batch_first = True, enforce_sorted = False)
+        packed_sequence_in = U.pack_padded_sequence(sequence_in, lens.cpu(), batch_first = True, enforce_sorted = False)
         
         # [B,L,E] --> [B,L,E], [2,B,E/2]
         packed_sequence_out, sequence_rep = self.rnn(packed_sequence_in, hidden)
