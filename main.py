@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 from gensim.models import KeyedVectors
 
 from prepare_data import *
-from model import *
+from model.model import *
 from training import *
 
 def main():
@@ -57,7 +57,7 @@ def main():
 
 	if args.pretrained != 'None':
 		pretrained = KeyedVectors.load(args.pretrained, mmap = 'r')
-		vocab = create_vocab(word_freq, pretrained_vocab=pretrained.vocab)
+		vocab = create_vocab(word_freq, pretrained_vocab=pretrained.key_to_index)
 		ptemb_matrix = create_ptemb_matrix(vocab, pretrained)
 	else:
 		vocab = create_vocab(word_freq)

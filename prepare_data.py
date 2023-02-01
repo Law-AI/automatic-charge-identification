@@ -50,7 +50,7 @@ def create_ptemb_matrix(word_vocab, pretrained, embedding_dim=128):
 	ptemb_matrix = np.zeros((len(word_vocab), embedding_dim))
 	for word, idx in word_vocab.items():
 		if word == '[PAD]': continue
-		ptemb_matrix[idx] = pretrained[word] if word in pretrained.vocab else np.random.normal(scale=0.6, size=(embedding_dim,))
+		ptemb_matrix[idx] = pretrained[word] if word in pretrained.key_to_index else np.random.normal(scale=0.6, size=(embedding_dim,))
 	return ptemb_matrix
 
 def numericalize_dataset(data, word_vocab, label_vocab):
